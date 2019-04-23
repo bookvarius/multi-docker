@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docekr run react-test npm test -- --coverage
+
+after_success:
+  - docker build -t bookvarius/multi-client ./client
+  - docker build -t bookvarius/multi-nginx ./nginx
+  - docker build -t bookvarius/multi-server ./server
+  - docker build -t bookvarius/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push bookvarius/multi-client
+  - docker push bookvarius/multi-nginx
+  - docker push bookvarius/multi-server
+  - docker push bookvarius/multi-worker
