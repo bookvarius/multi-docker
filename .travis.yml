@@ -6,7 +6,7 @@ before_install:
   - docker build -t react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docekr run react-test npm run test -- --coverage
+  - docker run react-test npm run test -- --coverage
 
 after_success:
   - docker build -t bookvarius/multi-client ./client
