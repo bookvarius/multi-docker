@@ -21,7 +21,7 @@ class App extends Component {
         	        target="_blank"
         	        rel="noopener noreferrer"
         	    >
-        	        Learn React
+        	        Fib calculator version 2
         	    </a>
 		    <Link to="/">Home</Link>
 		    <Link to="/otherpage">Other page</Link>
